@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --dark: #16181D;
+    --bg-1: #23272F;
+    --bg-2: #343A46;
+    --primary: #149ECA;
+    --light: #F6F7F9;
+}
+
+body {
+    background-color: var(--bg-1);
+    color: var(--light);
+}
+
+
+/* sidebar */
+
+.searchbar {
+    background-color: var(--dark);
+}
+
+.searchbar input {
+    color: var(--light);
+}
+
+.searchbar input:focus {
+    outline: none;
+}
