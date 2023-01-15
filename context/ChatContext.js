@@ -10,7 +10,11 @@ export const ChatProvider = ({ children }) => {
     const { userData } = useContext(AuthContext)
 
     const [userContacts, setUserContacts] = useState()
+    const [chatId, setChatId] = useState()
+    const [chatEmail, setChatEmail] = useState()
+    const [messages, setMessages] = useState([])
     const [isLoading, setIsLoading] = useState(<Boolean />)
+    const [chatsLoading, setChatsLoading] = useState(<Boolean />)
 
     useEffect(() => {
         getContacts()
@@ -54,10 +58,50 @@ export const ChatProvider = ({ children }) => {
         setIsLoading(false)
     }
 
+
+    // get messages from particular chat
+    const getChatMessages = async (id) => {
+        setChatsLoading(true)
+        try {
+            let { data, error } = await supabase
+                .from("messages")
+                .select("message, sender")
+                .eq("chat_id", id)
+                .order('id', { ascending: true })
+
+            setMessages(data)
+            console.log("messages: ", data)
+        } catch (error) {
+            console.log("error getting messages", error)
+        }
+        setChatsLoading(false)
+    }
+
+    const getChatEmail = (email) => {
+        setChatEmail(email)
+    }
+
+    const sendChatMessages = async (message) => {
+        let { data, error } = await supabase
+            .from("messages")
+            .insert([{
+                message: message,
+                chat_id: chatId,
+                sender: userData.email
+            }])
+    }
+
     // exporting variables and functions to be used inside app
     const contextData = {
         userContacts: userContacts,
         getContacts: getContacts,
+        setChatId: setChatId,
+        chatId: chatId,
+        messages: messages,
+        sendChatMessages: sendChatMessages,
+        getChatMessages: getChatMessages,
+        chatsLoading: chatsLoading,
+        setChatEmail: setChatEmail
     }
 
     return (

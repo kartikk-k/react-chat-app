@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import { useContext, useState } from 'react'
+import Router from 'next/router'
 import AuthContext from '../context/AuthContext'
 
 function Signup() {
@@ -12,6 +13,7 @@ function Signup() {
     const signUp = () => {
         console.log(email.trim(), password)
         signUpWithPassword(email.trim(), password)
+        Router.push('/login')
     }
 
     return (
@@ -32,6 +34,7 @@ function Signup() {
                         <div className='flex justify-center'>
                             <button onClick={signUp} className='bg-[#16181D] p-2 px-6 rounded-md hover:opacity-70'>Sign up</button>
                         </div>
+                        <p className='cursor-pointer opacity-40' onClick={() => Router.push('/login')}>Have an account? Log in</p>
                     </div>
                 </div>
             </div>

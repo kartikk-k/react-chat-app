@@ -34,3 +34,29 @@ body {
 .searchbar input:focus {
     outline: none;
 }
+
+.full-app {
+    display: grid;
+    height: 100%;
+    grid-template-rows: 1fr;
+    grid-template-columns: 350px 5fr;
+}
+
+.sidebar {
+    height: 100vh;
+    border-right: 1px solid var(--dark);
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+
+/* ::-webkit-scrollbar-track {
+    background: var(--bg-2);
+} */
+
+ ::-webkit-scrollbar-thumb {
+    background: var(--bg-2);
+}

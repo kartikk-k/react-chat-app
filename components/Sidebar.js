@@ -4,6 +4,7 @@ import AuthContext from '../context/AuthContext'
 import ChatContext from '../context/ChatContext'
 import supabase from '../utils/supabase'
 import { AvatarIcon, ChatsIcon, MenuIcon, SearchIcon } from './Icons'
+import Contacts from './Contacts'
 
 function Sidebar() {
     const { userData, userPos } = useContext(AuthContext)
@@ -12,6 +13,7 @@ function Sidebar() {
     const [isCreateChat, setCreateChat] = useState(false)
     const [newEmail, setNewEmail] = useState(false)
 
+    // creating new chat/connection
     const createChat = async (email) => {
         console.log("creating chat")
         if (!email) return null
@@ -94,8 +96,8 @@ function Sidebar() {
 
 
     return (
-        <div>
-            <div>
+        <div className='sidebar'>
+            <div className='sticky top-0 bg-[#23272F]'>
                 {/* header with icons */}
                 <div className='flex justify-between z-40 px-2 items-center h-14 bg-[#343A46] shadow-lg'>
                     <div className='hover:opacity-60'>
@@ -147,6 +149,10 @@ function Sidebar() {
                     </div>
                 </div>
             )}
+
+            <div>
+                <Contacts />
+            </div>
         </div>
     )
 }

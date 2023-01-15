@@ -39,6 +39,7 @@ function Login() {
                         <div className='flex justify-center'>
                             <button onClick={signIn} className='bg-[#16181D] p-2 px-6 rounded-md hover:opacity-70'>Sign in</button>
                         </div>
+                        <p className='cursor-pointer opacity-40' onClick={() => Router.push('/signup')}>Don't have an account? Sign up</p>
                     </div>
                 </div>
             </div>

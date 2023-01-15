@@ -4,6 +4,7 @@ import AuthContext from '../context/AuthContext'
 import Router from 'next/router'
 import Sidebar from '../components/Sidebar'
 import Contacts from '../components/Contacts'
+import ChatBox from '../components/ChatBox'
 // import styles from '../styles/Home.module.css'
 
 
@@ -28,9 +29,9 @@ export default function Home() {
       </Head>
 
       <div>
-        <div>
+        <div className='full-app overflow-hidden'>
           <Sidebar />
-          <Contacts />
+          <ChatBox chatId={23} />
         </div>
       </div>
     </>
