@@ -1,7 +1,6 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import supabase from "../utils/supabase";
 import AuthContext from "./AuthContext";
-import * as EmailValidator from 'email-validator'
 
 const ChatContext = createContext()
 export default ChatContext
@@ -19,7 +18,6 @@ export const ChatProvider = ({ children }) => {
     useEffect(() => {
         getContacts()
     }, [])
-
 
     // getting logged in user's connected users
     const getContacts = async () => {
@@ -90,6 +88,49 @@ export const ChatProvider = ({ children }) => {
                 sender: userData.email
             }])
     }
+
+    // tracking for realtime message updates
+    useEffect(() => {
+        const subscription = supabase
+            .channel('public:messages')
+            .on('postgres_changes', { event: '*', schema: 'public', table: 'messages' },
+                payload => {
+                    console.log("Changes received: ", payload)
+                    // setMessages(payload.new)
+                    if (payload.new.chat_id === chatId) {
+                        if (messages) {
+                            setMessages(messages.concat(payload.new))
+                        } else {
+                            setMessages(payload.new)
+                        }
+                    }
+                })
+            .subscribe()
+
+        return () => {
+            supabase.removeChannel(subscription)
+        }
+    }, [messages])
+
+    // tracking for realtime user updates
+    useEffect(() => {
+        const subscription = supabase
+            .channel('public:chat')
+            .on('postgres_changes', { event: '*', schema: 'public', table: 'chat' },
+                payload => {
+                    console.log("Changes received: ", payload)
+                    if (userContacts) {
+                        setUserContacts(userContacts.concat(payload.new))
+                    } else {
+                        setUserContacts(payload.new)
+                    }
+                })
+            .subscribe()
+
+        return () => {
+            supabase.removeChannel(subscription)
+        }
+    }, [userContacts])
 
     // exporting variables and functions to be used inside app
     const contextData = {

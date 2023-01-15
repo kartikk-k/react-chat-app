@@ -8,7 +8,7 @@ import { RefreshIcon } from './Icons'
 
 function ChatBox({ }) {
     const { userData } = useContext(AuthContext)
-    const { getChatMessages, chatId, messages, sendChatMessages, chatsLoading, chatEmail } = useContext(ChatContext)
+    const { getChatMessages, chatId, messages, sendChatMessages, chatsLoading } = useContext(ChatContext)
 
     const [message, setMessage] = useState()
 
@@ -20,7 +20,7 @@ function ChatBox({ }) {
         if (message) {
             sendChatMessages(message)
             setMessage(null)
-            getChatMessages(chatId)
+            // getChatMessages(chatId)
         }
     }
 
@@ -60,20 +60,25 @@ function ChatBox({ }) {
                                             <p className='px-5 py-1 bg-[#] my-1'><span className='font-semibold text-xs opacity-60 px-2'>Other:</span> {message.message}</p>
                                         )}
                                     </div>
-
                                 ))}
                             </div>
-                        ) : <p>no chats exist</p>}
+                        ) :
+                            <div className='mt-5'>
+                                <p className='text-center'>No chats exist</p>
+                                <p className='text-center'>Select chat if not selected</p>
+                            </div>
+                        }
                     </div>
                 </div>
             ) : <p>getting chats</p>
             }
             <div className='absolute bottom-0 w-full bg-[#23272F] pb-4'>
-                <div className='flex px-5 space-x-4'>
-                    <input type="text" onChange={(e) => setMessage(e.target.value)} value={message != null ? message : ''} placeholder='type your message here' className='flex-1 bg-[#16181D] px-5 py-2 rounded-md focus:outline-none' />
-                    <button onClick={handleMessageSent} className='bg-[#343A46] px-5 rounded-md'>send</button>
-                </div>
-
+                {messages && (
+                    <div className='flex px-5 space-x-4'>
+                        <input type="text" onChange={(e) => setMessage(e.target.value)} value={message != null ? message : ''} placeholder='type your message here' className='flex-1 bg-[#16181D] px-5 py-2 rounded-md focus:outline-none' />
+                        <button onClick={handleMessageSent} className='bg-[#343A46] px-5 rounded-md'>send</button>
+                    </div>
+                )}
             </div>
         </div>
     )

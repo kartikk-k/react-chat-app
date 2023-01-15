@@ -16,7 +16,7 @@ function Contacts() {
             <div>
                 <h1 className='py-2 font-semibold text-xl'>Chats</h1>
                 {/* chats */}
-                {userContacts ? (
+                {userContacts && userContacts.length != 0 ? (
                     <div className='chat-box border border-[#343A46] rounded-md divide-y divide-[#343A46]'>
                         {/* contact */}
                         {userContacts.map((user, index) => (

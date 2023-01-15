@@ -7,7 +7,7 @@ import { AvatarIcon, ChatsIcon, MenuIcon, SearchIcon } from './Icons'
 import Contacts from './Contacts'
 
 function Sidebar() {
-    const { userData, userPos } = useContext(AuthContext)
+    const { userData } = useContext(AuthContext)
     const { getContacts } = useContext(ChatContext)
 
     const [isCreateChat, setCreateChat] = useState(false)
