@@ -20,7 +20,6 @@ function ChatBox({ }) {
         if (message) {
             sendChatMessages(message)
             setMessage(null)
-            // getChatMessages(chatId)
         }
     }
 

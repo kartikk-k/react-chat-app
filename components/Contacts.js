@@ -25,7 +25,11 @@ function Contacts() {
                             </div>
                         ))}
                     </div>
-                ) : <p>getting your chats...</p>}
+                ) : <div>
+                    <p>getting your chats...</p>
+                    <p>add contacts if new user!</p>
+                </div>
+                }
             </div>
         </div>
     )
