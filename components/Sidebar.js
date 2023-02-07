@@ -13,6 +13,8 @@ function Sidebar() {
     const [isCreateChat, setCreateChat] = useState(false)
     const [newEmail, setNewEmail] = useState(false)
 
+    const [isSidebar, setIsSidebar] = useState()
+
     // creating new chat/connection
     const createChat = async (email) => {
         console.log("creating chat")
@@ -55,7 +57,6 @@ function Sidebar() {
         }
     }
 
-
     // checking if chat connection already exists?
     const chatExist = async (email) => { // optimise by directly checking if request user exist from userContacts
         console.log("email: ", email)
@@ -96,34 +97,15 @@ function Sidebar() {
 
 
     return (
-        <div className='sidebar'>
+        <div className='sidebar min-w-[350px] bg-[#23272F] h-auto overflow-scroll'>
             <div className='sticky top-0 bg-[#23272F]'>
-                {/* header with icons */}
-                <div className='flex justify-between z-40 px-2 items-center h-14 bg-[#343A46] shadow-lg'>
-                    <div className='hover:opacity-60'>
-                        <AvatarIcon />
-                    </div>
-                    <div>
-                        {/* <p className='font-semibold'>{userData?.email ? userData.email : ''}</p> */}
-                        <p className='font-semibold'>Whatsapp Clone</p>
-                    </div>
-                    <div className='flex space-x-2'>
-                        <div className='hover:opacity-60'>
-                            <ChatsIcon className="bg-black" />
-                        </div>
-                        <div className='hover:opacity-60'>
-                            <MenuIcon />
-                        </div>
-                    </div>
-                </div>
-
                 {/* searchbar */}
                 <div className='m-4'>
-                    <div className='flex p-2 rounded-md space-x-2 items-center searchbar'>
+                    <div className='flex items-center p-2 space-x-2 rounded-md searchbar'>
                         <div className='opacity-60'>
                             <SearchIcon />
                         </div>
-                        <input type="text" placeholder='search in chats' className='bg-transparent w-full' />
+                        <input type="text" placeholder='search in chats' className='w-full bg-transparent' />
                     </div>
                 </div>
 
@@ -136,8 +118,8 @@ function Sidebar() {
             {/* create chat option */}
             {isCreateChat && (
                 <div>
-                    <div onClick={() => setCreateChat(false)} className='absolute h-full w-full bg-black opacity-80 top-0 z-30'></div>
-                    <div className='absolute flex w-full mt-5 items-center justify-center top-52 z-40 '>
+                    <div onClick={() => setCreateChat(false)} className='absolute top-0 z-50 w-full h-full bg-black opacity-80'></div>
+                    <div className='absolute z-50 flex items-center justify-center w-full mt-5 top-52 '>
                         <div className='bg-[#343A46] p-10 rounded-md space-x-2'>
                             <h1 className='text-center'>Create new chat</h1>
                             <input type="text" onChange={(e) => setNewEmail(e.target.value)} placeholder='example@gmail.com' className='bg-transparent focus:outline-none bg-[#16181D] p-2 rounded-md m-2' />
