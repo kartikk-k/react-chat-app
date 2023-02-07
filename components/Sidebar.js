@@ -97,7 +97,7 @@ function Sidebar() {
 
 
     return (
-        <div className='sidebar min-w-[350px] bg-[#23272F] h-auto overflow-scroll'>
+        <div className='sidebar z-50 w-full md:min-w-[350px] bg-[#23272F] h-auto overflow-scroll'>
             <div className='sticky top-0 bg-[#23272F]'>
                 {/* searchbar */}
                 <div className='m-4'>

@@ -12,7 +12,7 @@ function Contacts() {
     }
 
     return (
-        <div className='m-4'>
+        <div className='z-50 m-4'>
             <div>
                 <h1 className='py-2 text-xl font-semibold'>Chats</h1>
                 {/* chats */}

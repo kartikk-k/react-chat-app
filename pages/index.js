@@ -33,7 +33,7 @@ export default function Home() {
         <div className='flex-row md:flex full-app'>
           <div>
             {/* app header */}
-            <div className='flex w-screen md:w-auto border-b justify-between z-40 px-2 items-center h-14 bg-[#343A46] shadow-lg'>
+            <div className='flex w-screen md:w-auto border-b md:border-r border-r-gray-500 border-r-0 justify-between z-40 px-2 items-center h-14 bg-[#343A46] shadow-lg'>
               <div className='hover:opacity-60'>
                 <AvatarIcon />
               </div>
@@ -52,7 +52,9 @@ export default function Home() {
             </div>
 
             <div className={`absolute top-0 z-50 md:z-40 md:block md:static ${isChatbox ? 'block' : 'hidden'} `}>
+              <div onClick={() => setIsChatbox(!isChatbox)} className='absolute top-0 left-0 w-screen h-screen bg-black md:hidden -z-10 bg-opacity-60'></div>
               <Sidebar />
+              <div onClick={() => setIsChatbox(!isChatbox)} className={`w-screen absolute z-40 h-screen bg-black bg-opacity-60 ${isChatbox ? 'block' : 'hidden'}`}></div>
               <div onClick={() => setIsChatbox(!isChatbox)} className='absolute bottom-5 left-4'>
                 <button className='px-6 md:hidden py-2 rounded-md bg-[#16181D]'>Close</button>
               </div>
